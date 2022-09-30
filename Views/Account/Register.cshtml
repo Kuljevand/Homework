@@ -24,6 +24,14 @@
         </div>
         <div class="col-md-3 col-6">
             <div class="form-floating mb-3">
+                <select asp-for="Role" asp-items="@ViewBag.Roles" class="form-select">
+                    <option value="">-- Избери --</option>
+                </select>
+                <label asp-for="Role"></label>
+            </div>
+        </div>
+        <div class="col-md-3 col-6">
+            <div class="form-floating mb-3">
                 <input asp-for="Name" type="text" class="form-control" placeholder="Name">
                 <label asp-for="Name">Корисничко име</label>
             </div>
@@ -36,7 +44,9 @@
         </div>
         <div class="col-md-3 col-6">
             <div class="form-floating mb-3">
-                <input asp-for="ClientTypeId" type="text" class="form-control" placeholder="ClientTypeId">
+                <select asp-for="ClientTypeId" asp-items="@ViewBag.ClientTypes" class="form-select">
+                    <option value="">-- Избери --</option>
+                </select>
                 <label asp-for="ClientTypeId">Тип на клиент</label>
             </div>
         </div>
@@ -48,14 +58,38 @@
         </div>
         <div class="col-md-3 col-6">
             <div class="form-floating mb-3">
-                <input asp-for="CityId" type="text" class="form-control" placeholder="CityId">
+                <select asp-for="CityId" asp-items="@ViewBag.Cities" class="form-select">
+                    <option value="">-- Избери --</option>
+                </select>
                 <label asp-for="CityId">Град</label>
             </div>
         </div>
         <div class="col-md-3 col-6">
             <div class="form-floating mb-3">
-                <input asp-for="CountryId" type="text" class="form-control" placeholder="CountryId">
+                <select asp-for="CountryId" asp-items="@ViewBag.Countries" class="form-select">
+                    <option value="">-- Избери --</option>
+                </select>
                 <label asp-for="CountryId">Држава</label>
+            </div>
+        </div>
+         <div class="col-md-3 col-6 DateOfEstablishment d-none">
+            <div class="form-floating mb-3">
+                <input asp-for="DateOfEstablishment" type="date" class="form-control" placeholder="DateOfEstablishment">
+                <label asp-for="DateOfEstablishment">Датум на основање</label>
+            </div>
+        </div>
+        <div class="col-md-3 col-6 NumberOfEmployees d-none">
+            <div class="form-floating mb-3">
+                <input asp-for="NumberOfEmployees" type="number" class="form-control" placeholder="NumberOfEmployees">
+                <label asp-for="NumberOfEmployees">Број на вработени</label>
+            </div>
+        </div>
+        <div class="col-md-3 col-6 Activities d-none">
+            <div class="form-floating mb-3">
+                <select asp-for="Activities" asp-items="@ViewBag.Activities" class="form-select">
+                    <option value="">-- Избери --</option>
+                </select>
+                <label asp-for="Activities">Активности</label>
             </div>
         </div>
     </div>

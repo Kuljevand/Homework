@@ -3,6 +3,7 @@ using System.Collections.Generic;
 
 namespace Homework1.Models
 {
+  
     public partial class Reference
     {
         public long ReferenceId { get; set; }

@@ -49,7 +49,8 @@ namespace Homework1.Controllers
         // GET: References/Create
         public IActionResult Create()
         {
-            ViewData["ReferenceTypeId"] = new SelectList(_context.ReferenceTypes, "ReferenceTypeId", "ReferenceTypeId");
+            ViewData["ReferenceTypes"] = new SelectList(_context.ReferenceTypes.ToList(), "ReferenceTypeId", "Description");
+
             return View();
         }
 
@@ -156,14 +157,14 @@ namespace Homework1.Controllers
             {
                 _context.References.Remove(reference);
             }
-            
+
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
 
         private bool ReferenceExists(long id)
         {
-          return (_context.References?.Any(e => e.ReferenceId == id)).GetValueOrDefault();
+            return (_context.References?.Any(e => e.ReferenceId == id)).GetValueOrDefault();
         }
     }
 }

@@ -7,7 +7,8 @@ namespace Homework1.Helpers
     {
         public static string GeneratePassword(int PasswordLength)
         {
-            var password = new Password(PasswordLength).IncludeLowercase().IncludeUppercase().IncludeSpecial().Next();
+
+            var password = new Password(PasswordLength).IncludeNumeric().IncludeLowercase().IncludeUppercase().IncludeSpecial().Next();
             return password;
 
         }
