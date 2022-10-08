@@ -8,7 +8,6 @@ namespace Homework1.Models
         public Service()
         {
             Requests = new HashSet<Request>();
-            ServiceActivities = new HashSet<ServiceActivity>();
         }
 
         public long ServiceId { get; set; }
@@ -18,10 +17,8 @@ namespace Homework1.Models
         public DateTime? UpdatedOn { get; set; }
         public int? UpdatedBy { get; set; }
         public bool? IsActive { get; set; }
-        public string? Activities { get; set; }
-
 
         public virtual ICollection<Request> Requests { get; set; }
-        public virtual ICollection<ServiceActivity> ServiceActivities { get; set; }
+        public virtual ICollection<ServiceActivity> ServiceActivities { get; set; } /*explanation*/
     }
 }

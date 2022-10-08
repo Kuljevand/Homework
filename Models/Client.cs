@@ -19,7 +19,7 @@ namespace Homework1.Models
         public int CityId { get; set; }
         public int? CountryId { get; set; }
         public DateTime? DateEstablished { get; set; }
-        public int NumberOfEmployees { get; set; }
+        public int? NumberOfEmployees { get; set; }
         public DateTime CreatedOn { get; set; }
         public DateTime? UpdatedOn { get; set; }
 

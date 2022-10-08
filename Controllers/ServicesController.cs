@@ -23,6 +23,7 @@ namespace Homework1.Controllers
             _context = context;
         }
 
+        #region Index/Details
         // GET: Services
         public async Task<IActionResult> Index()
         {
@@ -54,7 +55,9 @@ namespace Homework1.Controllers
 
             return View(service);
         }
+        #endregion
 
+        #region Create
         // GET: Services/Create
         public IActionResult Create()
         {
@@ -101,7 +104,9 @@ namespace Homework1.Controllers
             }
             return View(model);
         }
+        #endregion
 
+        #region Edit
         // GET: Services/Edit/5
         public async Task<IActionResult> Edit(long? id)
         {
@@ -152,7 +157,9 @@ namespace Homework1.Controllers
             }
             return View(service);
         }
+        #endregion
 
+        #region Delete
         // GET: Services/Delete/5
         public async Task<IActionResult> Delete(long? id)
         {
@@ -189,6 +196,7 @@ namespace Homework1.Controllers
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
+        #endregion
 
         private bool ServiceExists(long id)
         {

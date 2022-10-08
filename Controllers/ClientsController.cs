@@ -20,7 +20,7 @@ namespace Homework1.Controllers
         {
             _context = context;
         }
-
+        #region Index/Details
         // GET: Clients
         public async Task<IActionResult> Index()
         
@@ -46,7 +46,9 @@ namespace Homework1.Controllers
 
             return View(client);
         }
+        #endregion
 
+        #region Create
         // GET: Clients/Create
         public IActionResult Create()
         {
@@ -68,7 +70,9 @@ namespace Homework1.Controllers
             }
             return View(client);
         }
+        #endregion
 
+        #region Edit
         // GET: Clients/Edit/5
         public async Task<IActionResult> Edit(long? id)
         {
@@ -119,7 +123,9 @@ namespace Homework1.Controllers
             }
             return View(client);
         }
+        #endregion
 
+        #region Delete
         // GET: Clients/Delete/5
         public async Task<IActionResult> Delete(long? id)
         {
@@ -156,6 +162,7 @@ namespace Homework1.Controllers
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
+        #endregion
 
         private bool ClientExists(long id)
         {

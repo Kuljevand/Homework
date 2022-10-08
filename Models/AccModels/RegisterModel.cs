@@ -25,7 +25,7 @@ namespace Homework1.Models.AccModels
         [Required()]
         public string? Role { get; set; }
         [Required()]
-        public DateTime DateOfEstablishment { get; set; } = DateTime.Today; /*not working*/
+        public DateTime DateOfEstablishment { get; set; } = DateTime.Today; 
         [Required()]
         public string? NumberOfEmployees { get; set; }
         [Required()]

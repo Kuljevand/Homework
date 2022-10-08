@@ -275,7 +275,7 @@ namespace Homework1.Data
 
                 entity.Property(e => e.UpdatedOn).HasColumnType("datetime");
 
-                entity.HasOne(d => d.Service)
+                entity.HasOne(d => d.Service) /*explanation1*/
                     .WithMany(p => p.Requests)
                     .HasForeignKey(d => d.ServiceId)
                     .OnDelete(DeleteBehavior.ClientSetNull)
@@ -318,7 +318,7 @@ namespace Homework1.Data
                     .HasConstraintName("FK_ServiceActivity_Activity");
 
                 entity.HasOne(d => d.Service)
-                    .WithMany(p => p.ServiceActivities)
+                    .WithMany(p => p.ServiceActivities) /*explanation*/
                     .HasForeignKey(d => d.ServiceId)
                     .OnDelete(DeleteBehavior.ClientSetNull)
                     .HasConstraintName("FK_ServiceActivity_Service");

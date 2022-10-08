@@ -21,7 +21,7 @@ namespace Homework1.Controllers
         {
             _context = context;
         }
-
+        #region Index/Details
         // GET: Activities
         public async Task<IActionResult> Index()
         {
@@ -45,7 +45,9 @@ namespace Homework1.Controllers
 
             return View(activity);
         }
+        #endregion
 
+        #region Create
         // GET: Activities/Create
         public IActionResult Create()
         {
@@ -67,7 +69,9 @@ namespace Homework1.Controllers
             }
             return View(activity);
         }
+        #endregion
 
+        #region Edit
         // GET: Activities/Edit/5
         public async Task<IActionResult> Edit(long? id)
         {
@@ -118,7 +122,9 @@ namespace Homework1.Controllers
             }
             return View(activity);
         }
+        #endregion
 
+        #region Delete
         // GET: Activities/Delete/5
         public async Task<IActionResult> Delete(long? id)
         {
@@ -160,5 +166,6 @@ namespace Homework1.Controllers
         {
           return _context.Activities.Any(e => e.ActivityId == id);
         }
+        #endregion
     }
 }

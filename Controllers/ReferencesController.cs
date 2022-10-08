@@ -20,6 +20,7 @@ namespace Homework1.Controllers
             _context = context;
         }
 
+        #region Index/Details
         // GET: References
         public async Task<IActionResult> Index()
         {
@@ -45,7 +46,9 @@ namespace Homework1.Controllers
 
             return View(reference);
         }
+        #endregion
 
+        #region Create
         // GET: References/Create
         public IActionResult Create()
         {
@@ -70,7 +73,9 @@ namespace Homework1.Controllers
             ViewData["ReferenceTypeId"] = new SelectList(_context.ReferenceTypes, "ReferenceTypeId", "ReferenceTypeId", reference.ReferenceTypeId);
             return View(reference);
         }
+        #endregion
 
+        #region Edit
         // GET: References/Edit/5
         public async Task<IActionResult> Edit(long? id)
         {
@@ -123,7 +128,9 @@ namespace Homework1.Controllers
             ViewData["ReferenceTypeId"] = new SelectList(_context.ReferenceTypes, "ReferenceTypeId", "ReferenceTypeId", reference.ReferenceTypeId);
             return View(reference);
         }
+        #endregion
 
+        #region Delete
         // GET: References/Delete/5
         public async Task<IActionResult> Delete(long? id)
         {
@@ -161,6 +168,7 @@ namespace Homework1.Controllers
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
+        #endregion 
 
         private bool ReferenceExists(long id)
         {

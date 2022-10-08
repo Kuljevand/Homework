@@ -16,6 +16,6 @@ namespace Homework1.Models
         public int? UpdatedBy { get; set; }
         public bool? IsActive { get; set; }
 
-        public virtual ReferenceType ReferenceType { get; set; } = null!;
+        public virtual ReferenceType? ReferenceType { get; set; } = null!;
     }
 }

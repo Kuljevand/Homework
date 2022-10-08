@@ -33,9 +33,9 @@ namespace Homework1.Controllers
             _roleManager = roleManager;
             _emailService = emailService;
             _roleManager = roleManager;
-            
-        }
 
+        }
+        #region Login
         [HttpGet]
         public IActionResult Login()
         {
@@ -47,7 +47,7 @@ namespace Homework1.Controllers
         }
 
         [HttpPost]
-        
+
         public async Task<IActionResult> Login(LoginModel model)
         {
             var result = await _signInManager.PasswordSignInAsync(userName: model.Email, password: model.Password, isPersistent: false, lockoutOnFailure: true);
@@ -60,27 +60,17 @@ namespace Homework1.Controllers
 
             return RedirectToAction(nameof(HomeController.Index), "Home");
         }
+        #endregion 
 
-
-
-
-
-
-        
+        #region Register
         [HttpGet]
         public IActionResult Register()
         {
             ViewBag.ClientTypes = new SelectList(_context.References.Where(x => x.ReferenceTypeId == 1).ToList(), "ReferenceId", "Description");
             ViewBag.Cities = new SelectList(_context.References.Where(x => x.ReferenceTypeId == 2).ToList(), "ReferenceId", "Description");
             ViewBag.Countries = new SelectList(_context.References.Where(x => x.ReferenceTypeId == 3).ToList(), "ReferenceId", "Description");
-
             ViewBag.Roles = new SelectList(_roleManager.Roles.ToList(), "Name", "Name");
-
             ViewBag.Activities = new SelectList(_context.Activities.ToList(), "ActivityId", "Name");
-
-
-
-
 
             return View();
         }
@@ -89,14 +79,13 @@ namespace Homework1.Controllers
         public async Task<IActionResult> Register(RegisterModel model)
         {
             var userExists = await _userManager.FindByEmailAsync(model.Email);
-            
+
 
             if (userExists != null)
             {
                 ModelState.AddModelError("Error", "Корисникот веќе постои!");
                 return View(model);
             }
-
 
             IdentityUser user = new IdentityUser()
             {
@@ -129,9 +118,8 @@ namespace Homework1.Controllers
                 CityId = model.CityId,
                 CountryId = model.CountryId,
                 DateEstablished = DateTime.Now,
-               /* NumberOfEmployees = model.NumberOfEmployees */
-                                
-                
+
+
             };
 
             await _context.Clients.AddAsync(client);
@@ -158,27 +146,21 @@ namespace Homework1.Controllers
 
             return RedirectToAction(nameof(Login));
         }
+        #endregion 
 
-
-
-     
-        
-        
-        
+        #region ForgotPassword
         [HttpGet]
         public IActionResult ForgotPassword()
         {
             return View();
         }
 
-        [HttpPost]
 
+        [HttpPost]
         public async Task<IActionResult> ForgotPassword(ForgotPasswordModel model)
         {
-            var user = await _userManager.FindByEmailAsync(model.Email); 
-
+            var user = await _userManager.FindByEmailAsync(model.Email);
             var token = await _userManager.GeneratePasswordResetTokenAsync(user);
-
             var callback = Url.Action(action: "ResetPassword", controller: "Account", values: new { token, email = user.Email }, HttpContext.Request.Scheme);
 
             EmailSetUp emailSetUp = new EmailSetUp()
@@ -197,12 +179,9 @@ namespace Homework1.Controllers
 
             return RedirectToAction(nameof(Login));
         }
+        #endregion ForgotPassword
 
-        
-        
-        
-        
-        
+        #region ResetPassword
         [HttpGet]
         public IActionResult ResetPassword(string token, string email)
         {
@@ -234,13 +213,9 @@ namespace Homework1.Controllers
 
             return RedirectToAction(nameof(Login));
         }
+        #endregion 
 
-       
-        
-        
-        
-        
-        
+        #region ChangePassword
         [HttpGet]
         [Authorize]
         public IActionResult ChangePassword()
@@ -268,11 +243,9 @@ namespace Homework1.Controllers
 
             return View();
         }
+        #endregion 
 
-
-
-
-
+        #region ChangeUserInfo
         [Authorize]
         [HttpGet]
 
@@ -292,26 +265,26 @@ namespace Homework1.Controllers
 
             ViewBag.Countries = new SelectList(_context.References.Where(x => x.ReferenceTypeId == 3).ToList(), "ReferenceId", "Description");
 
-            
+
             ViewBag.Activities = new SelectList(_context.Activities.ToList(), "ActivityId", "Name");
 
 
             ChangeUserInfo model = new ChangeUserInfo()
             {
 
-            Name = clientUser.Name,
-            Address = clientUser.Address,
-            IdNo = clientUser.IdNo,
-            CountryId = (int)clientUser.CountryId,
-            CityId = clientUser.CityId,
-            ClientTypeId = clientUser.ClientTypeId,
-            PhoneNumber = applicationUser.PhoneNumber,
-          /*DateEstablished = DateTime.Now, 
-            NumberOfEmployees = model.NumberOfEmployees,
-            Activities = model.Activities*/
+                Name = clientUser.Name,
+                Address = clientUser.Address,
+                IdNo = clientUser.IdNo,
+                CountryId = (int)clientUser.CountryId,
+                CityId = clientUser.CityId,
+                ClientTypeId = clientUser.ClientTypeId,
+                PhoneNumber = applicationUser.PhoneNumber,
+                /*DateEstablished = DateTime.Now, 
+                  NumberOfEmployees = model.NumberOfEmployees,
+                  Activities = model.Activities*/
 
 
-            };     
+            };
 
             return View(model);
         }
@@ -345,7 +318,7 @@ namespace Homework1.Controllers
             applicationUser.PhoneNumber = model.PhoneNumber;
 
             var appUserResult = await _userManager.UpdateAsync(applicationUser);
-            
+
             if (!appUserResult.Succeeded)
             {
                 ModelState.AddModelError("Error", "Се случи грешка обидете се повторно!");
@@ -360,16 +333,16 @@ namespace Homework1.Controllers
             clientUser.CityId = model.CityId;
             clientUser.IdNo = model.IdNo;
             clientUser.UpdatedOn = DateTime.Now;
-          /*clientUser.DateEstablished = model.DateOfEstablishment,
-            clientUser.NumberOfEmployees = model.NumberOfEmployees
-            clientUser.ClientActivities = model */
+            /*clientUser.DateEstablished = model.DateOfEstablishment,
+              clientUser.NumberOfEmployees = model.NumberOfEmployees
+              clientUser.ClientActivities = model */
 
             try
             {
 
                 _context.Update(clientUser);
                 await _context.SaveChangesAsync();
-            
+
             }
             catch (Exception e)
             {
@@ -383,19 +356,9 @@ namespace Homework1.Controllers
             ModelState.AddModelError("Succeeded", "Успешно променети информации!");
             return View(model);
         }
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
+        #endregion 
+
+        #region LogOut
         [HttpPost]
         public async Task<IActionResult> LogOut()
         {
@@ -403,9 +366,10 @@ namespace Homework1.Controllers
 
             return RedirectToAction(nameof(HomeController.Index), "Home");
         }
-    }
+        #endregion 
 
-    internal class HttPostAttribute : Attribute
-    {
+        internal class HttPostAttribute : Attribute
+        {
+        }
     }
 }
